@@ -1,5 +1,5 @@
 export const API = '/api';
-export const TOKEN_KEY = 'retablo.jwt';
+export const TOKEN_KEY = 'token';
 export const THEME_KEY = 'retablo.theme';
 
 export interface User {

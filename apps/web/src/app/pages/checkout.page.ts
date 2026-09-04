@@ -31,7 +31,7 @@ import { FunctionItem, PlaybillItem, SeatItem, humanizeApiError, money, madridWh
         </label>
         <p><strong>Total {{ money(total()) }}</strong></p>
         @if (ctaError()) {
-          <p id="pay-action" class="cta-error">{{ ctaError() }}</p>
+          <p class="cta-error" role="alert">{{ ctaError() }}</p>
         }
         <p>
           <button id="pay-action" class="btn btn-primary" type="button" [disabled]="paying()" (click)="pay()">Pagar ahora</button>
