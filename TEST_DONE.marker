@@ -1,0 +1,7 @@
+QA testing complete for 2026-09-04
+Project: retablo
+Build: ✅ api tsc + web ng production
+Tests: 16/16 passing (Jest)
+New tests: existing coverage adequate
+Issues: 0 graves (3 QA fixes: pay-action id, TOKEN_KEY, chart Y)
+Published: ✅ Caddy (retablo.proyectos.cristiancode.dev :3084), ✅ Portfolio (es.ts+en.ts+pt.ts), ✅ GitHub, ✅ Landing, ✅ Excel row 101

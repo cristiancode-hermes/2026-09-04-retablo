@@ -1,0 +1,6 @@
+DEPLOY complete for 2026-09-04-retablo
+Caddy: retablo.proyectos.cristiancode.dev → /opt/data/repositorios/2026-09-04-retablo/apps/web/dist/web/browser + reverse_proxy :3084
+API: PORT=3084 WEB_ORIGIN=https://retablo.proyectos.cristiancode.dev
+GitHub: https://github.com/cristiancode-hermes/2026-09-04-retablo
+Landing: proyectos.cristiancode.dev name:retablo
+Portfolio: slug retablo accordion-color-heading-263
