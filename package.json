@@ -1,0 +1,17 @@
+{
+  "name": "retablo",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": ["apps/*"],
+  "scripts": {
+    "build:api": "pnpm --filter ./apps/api run build",
+    "build:web": "pnpm --filter ./apps/web run build",
+    "build": "pnpm run build:api && pnpm run build:web",
+    "start:api": "pnpm --filter ./apps/api run start:prod",
+    "test:api": "pnpm --filter ./apps/api test"
+  },
+  "devDependencies": {
+    "typescript": "^6.0.2"
+  },
+  "packageManager": "pnpm@10.34.5"
+}

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" role="img" aria-label="Boca del retablo">
+  <rect width="800" height="450" fill="#1A1216"/>
+  <rect x="80" y="40" width="640" height="370" fill="#3A4638"/>
+  <rect x="110" y="70" width="580" height="310" fill="#8B1E32"/>
+  <path d="M110 70 Q400 200 690 70" fill="#6F1828"/>
+  <ellipse cx="280" cy="250" rx="40" ry="55" fill="#E8B4A0"/>
+  <rect x="255" y="300" width="50" height="80" fill="#3A4638"/>
+  <ellipse cx="520" cy="240" rx="36" ry="50" fill="#C4B7BA"/>
+  <rect x="500" y="285" width="44" height="90" fill="#7A5A12"/>
+  <rect x="140" y="360" width="520" height="20" fill="#7A5A12"/>
+</svg>

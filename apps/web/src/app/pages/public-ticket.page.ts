@@ -1,0 +1,71 @@
+import { Component, inject, OnInit, signal } from '@angular/core';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ApiService } from '../core/api.service';
+import { TicketItem, money, madridWhen } from '../shared/models';
+
+@Component({
+  selector: 'app-public-ticket',
+  imports: [RouterLink],
+  template: `
+    <main class="wrap">
+      @if (loading()) {
+        <div class="sk"></div>
+      } @else if (error()) {
+        <section class="screen">
+          <h2>Pase no encontrado</h2>
+          <p>Ese código no abre ninguna butaca.</p>
+          <a class="btn btn-primary" routerLink="/">Volver al retablo</a>
+        </section>
+      } @else if (ticket(); as t) {
+        <p class="kicker">Pase de entrada</p>
+        <h1>{{ t.function?.show?.title }}</h1>
+        <p class="muted">{{ t.function ? madridWhen(t.function.startsAt) : '' }} · {{ t.status }}</p>
+        <p>Código <code>{{ t.code }}</code> · {{ money(t.totalCents) }}</p>
+        <ul>
+          @for (l of t.lines; track l.id) {
+            <li>{{ l.label }} · {{ money(l.amountCents) }}</li>
+          }
+        </ul>
+        @if (qr()) {
+          <div class="qr" [innerHTML]="qr()"></div>
+        }
+        <h2>Estados</h2>
+        <ol class="timeline">
+          @for (step of t.timeline; track step.at + step.action) {
+            <li>
+              <strong>{{ step.label }}</strong>
+              <div class="muted">{{ madridWhen(step.at) }}</div>
+            </li>
+          }
+        </ol>
+      }
+    </main>
+  `,
+})
+export class PublicTicketPage implements OnInit {
+  private readonly api = inject(ApiService);
+  private readonly route = inject(ActivatedRoute);
+  private readonly sanitizer = inject(DomSanitizer);
+  readonly ticket = signal<TicketItem | null>(null);
+  readonly qr = signal<SafeHtml | null>(null);
+  readonly loading = signal(true);
+  readonly error = signal('');
+  readonly money = money;
+  readonly madridWhen = madridWhen;
+
+  ngOnInit(): void {
+    const code = this.route.snapshot.paramMap.get('code') || '';
+    this.api.byCode(code).subscribe({
+      next: (t) => {
+        this.ticket.set(t);
+        if (t.qrSvg) this.qr.set(this.sanitizer.bypassSecurityTrustHtml(t.qrSvg));
+        this.loading.set(false);
+      },
+      error: () => {
+        this.error.set('missing');
+        this.loading.set(false);
+      },
+    });
+  }
+}
